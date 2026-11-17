@@ -282,5 +282,38 @@ gsap.utils.toArray('#verse, #date, #venue, #dress, #countdown, #rsvp, footer').f
   document.getElementById('introBtn').addEventListener('click', () => { bgm.play().then(() => setState(true)).catch(() => {}); });
 })();
 </script>
+<script>
+(function(){
+  function fix(){
+    const top = document.querySelector('#intro .bq-top'), bot = document.querySelector('#intro .bq-bottom');
+    const ring = document.querySelector('#intro .ring-clone');
+    const btn = document.getElementById('introBtn');
+    if (!top || !bot || !ring || !btn) return;
+    const rr = ring.getBoundingClientRect(), br = btn.getBoundingClientRect();
+    const rcx = rr.left + rr.width/2, rcy = rr.top + rr.height/2, rad = rr.width * 0.39;
+    function ang(el){ const m = new DOMMatrixReadOnly(getComputedStyle(el).transform); return Math.atan2(m.b, m.a); }
+    function wid(el){ return parseFloat(getComputedStyle(el).width); }
+    function place(el, tipX, tipY, A){
+      const W = wid(el), H = W * 0.8;
+      el.style.setProperty('position','fixed','important');
+      el.style.setProperty('inset','auto','important');
+      el.style.setProperty('width', W + 'px', 'important');
+      el.style.setProperty('left', (tipX - W/2) + 'px', 'important');
+      el.style.setProperty('top', (tipY - H) + 'px', 'important');
+      el.style.setProperty('transform-origin','50% 100%','important');
+      el.style.setProperty('transform', 'rotate(' + (A * 180 / Math.PI) + 'deg)', 'important');
+    }
+    // top: stem tip sits on the ring edge, keeping its current tilt
+    const tA = ang(top);
+    place(top, rcx + rad * (-Math.sin(tA)), rcy + rad * Math.cos(tA), tA);
+    // bottom: stem tip sits on the bottom edge of the button
+    const bA = ang(bot);
+    place(bot, br.left + br.width/2, br.bottom, bA);
+  }
+  addEventListener('load', () => requestAnimationFrame(fix));
+  addEventListener('resize', fix);
+  requestAnimationFrame(() => requestAnimationFrame(fix));
+})();
+</script>
 </body>
 </html>
