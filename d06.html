@@ -81,6 +81,7 @@ html[lang=ar] .lead,html[lang=ar] .lede{font-family:"Aref Ruqaa",serif;font-styl
 #intro .bq-top{position:absolute;inset:auto;left:50%;top:calc(50% - 250px);width:200px;height:auto;transform:translateX(-50%);filter:none;opacity:.95;display:block}#intro .bq-top svg,#intro .bq-bottom svg{width:100%;height:auto;preserveAspectRatio:auto}
 #intro .bq-top{position:absolute;inset:auto;left:50%;bottom:calc(50% + 150px);top:auto;width:min(260px,60vw);height:auto;transform:translateX(-50%) rotate(160deg);filter:none;opacity:.95;display:block}
 #intro .bq-top{position:absolute;inset:auto;left:50%;bottom:calc(50% + 150px);top:auto;width:min(340px,80vw);height:auto;transform:translateX(-50%) rotate(160deg);filter:none;opacity:.95;display:block}#intro .bq-bottom{position:absolute;inset:auto;left:50%;right:auto;top:calc(50% + 150px);bottom:auto;width:min(340px,80vw);height:auto;transform:translateX(-50%) rotate(160deg);filter:none;opacity:.95;display:block}
+#intro .ring-clone{position:relative}#intro .btn-wrap{position:relative;display:inline-block}#intro .bq-top{position:absolute;inset:auto;left:50%;top:auto;bottom:calc(100% - 30px);right:auto;width:min(340px,80vw);height:auto;transform:translateX(-50%) rotate(-35deg);filter:none;opacity:.95;display:block;z-index:0}#intro .bq-bottom{position:absolute;inset:auto;left:50%;right:auto;bottom:auto;top:calc(100% - 20px);width:min(340px,80vw);height:auto;transform:translateX(-50%) rotate(160deg);filter:none;opacity:.95;display:block;z-index:0}
 </style>
   <link href="https://fonts.googleapis.com/css2?family=Parisienne&family=Alex+Brush&family=Caveat:wght@400;600&family=Pinyon+Script&family=Italianno&family=Cairo:ital,wght@0,400;0,700;1,700&family=Aref+Ruqaa:wght@400;700&display=swap" rel="stylesheet">
 </head>
@@ -275,7 +276,7 @@ gsap.utils.toArray('#lede, #verse, #date, #venue, #dress, #countdown, #rsvp, foo
   if (bEl) bEl.innerHTML = botSvg;
   const src = document.querySelector('.ring-wrap');
   const slot = document.querySelector('#intro .ring-slot');
-  if (src && slot) { const cl = src.cloneNode(true); cl.classList.remove('ring-wrap'); cl.classList.add('ring-clone'); cl.removeAttribute('style'); slot.replaceWith(cl); }
+  if (src && slot) { const cl = src.cloneNode(true); cl.classList.remove('ring-wrap'); cl.classList.add('ring-clone'); cl.removeAttribute('style'); slot.replaceWith(cl); cl.style.position='relative'; cl.appendChild(document.querySelector('#intro .bq-top')); } const _btn = document.getElementById('introBtn'); const _w = document.createElement('div'); _w.className='btn-wrap'; _btn.parentNode.insertBefore(_w,_btn); _w.appendChild(_btn); _w.appendChild(document.querySelector('#intro .bq-bottom'));
   document.body.style.overflow = 'hidden';
   document.getElementById('introBtn').addEventListener('click', () => {
     const intro = document.getElementById('intro');
