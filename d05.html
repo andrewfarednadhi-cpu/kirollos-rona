@@ -80,10 +80,12 @@ footer{padding:40px 20px 60px;color:var(--muted);font-size:13px;letter-spacing:.
 html[lang=ar] .lead,html[lang=ar] .lede{font-family:"Aref Ruqaa",serif;font-style:normal;font-weight:700;font-size:clamp(30px,4.2vw,40px);line-height:1.8}.pair-photos div{width:clamp(160px,24vw,230px)}
 .lead,.lede{font-family:"Caveat",cursive;font-style:italic;font-weight:600;font-size:clamp(38px,5.4vw,54px);line-height:1.25;letter-spacing:.02em}
 #intro{position:fixed;inset:0;z-index:99;background:#FFFDF5;color:#1F2A26;display:flex;flex-direction:column;align-items:center;justify-content:center;transition:opacity .9s ease,visibility .9s;overflow:hidden}#intro.hide{opacity:0;visibility:hidden}#intro .bouquet{position:absolute;width:min(360px,80vw);opacity:.95;pointer-events:none}#intro .bq-top{top:-30px;left:50%;transform:translateX(-50%) rotate(-6deg)}#intro .bq-bottom{bottom:-40px;right:-40px;width:min(260px,60vw);transform:rotate(160deg)}#intro .bouquet svg{width:100%;height:auto;display:block}#intro .ring-clone{width:clamp(120px,22vw,160px);margin:0 auto 22px}#intro .ring-clone svg{width:100%;height:auto;display:block;overflow:visible}#intro .ring-clone .band{transform-origin:100px 100px;animation:introSpin 14s linear infinite}@keyframes introSpin{to{transform:rotate(360deg)}}#intro .intro-names{font-size:clamp(28px,5vw,44px);letter-spacing:.06em;margin-bottom:26px;text-align:center}#intro .intro-btn{font:inherit;font-size:18px;letter-spacing:.12em;padding:14px 30px;border-radius:999px;border:0;background:#2E4A42;color:#fff;cursor:pointer;min-height:50px;position:relative;z-index:2}html[lang=ar] #intro .intro-btn{font-size:20px;letter-spacing:0}
-.rsvp-btns{display:grid;gap:10px;width:min(480px,100%);margin-top:6px}.rsvp-btn{font:inherit;font-size:16px;padding:14px;border-radius:999px;border:1px solid currentColor;background:transparent;color:inherit;cursor:pointer;min-height:48px}</style>
+.rsvp-btns{display:grid;gap:10px;width:min(480px,100%);margin-top:6px}.rsvp-btn{font:inherit;font-size:16px;padding:14px;border-radius:999px;border:1px solid currentColor;background:transparent;color:inherit;cursor:pointer;min-height:48px}.music-btn{position:fixed;left:14px;bottom:14px;z-index:60;width:44px;height:44px;border-radius:50%;border:1px solid rgba(128,128,128,.4);background:rgba(255,255,255,.85);color:#3A3431;font-size:20px;cursor:pointer;opacity:.6}
+</style>
   <link href="https://fonts.googleapis.com/css2?family=Parisienne&family=Alex+Brush&family=Caveat:wght@400;600&family=Pinyon+Script&family=Italianno&family=Cairo:ital,wght@0,400;0,700;1,700&family=Aref+Ruqaa:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
+<audio id="bgm" loop preload="auto" src="music.mp3"></audio><button id="musicBtn" class="music-btn" aria-pressed="false" type="button" title="Music">♫</button>
 <div id="intro" role="dialog" aria-label="Invitation"><div class="bouquet bq-top" aria-hidden="true"></div><div class="bouquet bq-bottom" aria-hidden="true"></div><div class="ring-slot"></div><div class="intro-names">Kirollos &amp; Rona</div><button class="intro-btn" id="introBtn" type="button" data-i18n="introBtn">Open invitation</button></div>
 <div id="petals" aria-hidden="true"></div>
 <div class="topbar">
@@ -311,6 +313,15 @@ gsap.utils.toArray('#verse, #date, #venue, #dress, #countdown, #rsvp, footer').f
     document.body.style.overflow = '';
     setTimeout(() => intro.remove(), 1000);
   });
+})();
+</script>
+<script>
+(function(){
+  const bgm = document.getElementById('bgm'), btn = document.getElementById('musicBtn');
+  let playing = false;
+  function setState(p){ playing = p; btn.setAttribute('aria-pressed', String(p)); btn.style.opacity = p ? 1 : .6; }
+  btn.addEventListener('click', () => { if (playing) { bgm.pause(); setState(false); } else { bgm.play().then(() => setState(true)).catch(() => {}); } });
+  document.getElementById('introBtn').addEventListener('click', () => { bgm.play().then(() => setState(true)).catch(() => {}); });
 })();
 </script>
 </body>
