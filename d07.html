@@ -317,5 +317,29 @@ gsap.utils.toArray('#verse, #date, #venue, #dress, #countdown, #rsvp, footer').f
   requestAnimationFrame(() => requestAnimationFrame(fix));
 })();
 </script>
+<script>
+(function(){
+  function fixBottom(){
+    const bot = document.querySelector('#intro .bq-bottom');
+    const btn = document.getElementById('introBtn');
+    if (!bot || !btn) return;
+    const br = btn.getBoundingClientRect();
+    const m = new DOMMatrixReadOnly(getComputedStyle(bot).transform);
+    const A = Math.atan2(m.b, m.a);
+    const W = parseFloat(getComputedStyle(bot).width), H = W * 0.8;
+    const tipX = br.left + br.width * 0.42, tipY = br.bottom;
+    bot.style.setProperty('position','fixed','important');
+    bot.style.setProperty('inset','auto','important');
+    bot.style.setProperty('width', W + 'px', 'important');
+    bot.style.setProperty('left', (tipX - W/2) + 'px', 'important');
+    bot.style.setProperty('top', (tipY - H) + 'px', 'important');
+    bot.style.setProperty('transform-origin','50% 100%','important');
+    bot.style.setProperty('transform','rotate(' + (A*180/Math.PI) + 'deg)','important');
+  }
+  addEventListener('load', () => requestAnimationFrame(fixBottom));
+  addEventListener('resize', fixBottom);
+  requestAnimationFrame(() => requestAnimationFrame(fixBottom));
+})();
+</script>
 </body>
 </html>
