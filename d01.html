@@ -249,7 +249,7 @@ gsap.utils.toArray('#verse, #date, #venue, #dress, #countdown, #rsvp, footer').f
   const N = 12;
   const defs = '<defs><radialGradient id="pg" cx="50%" cy="30%" r="70%"><stop offset="0" stop-color="'+R[1]+'"/><stop offset="1" stop-color="'+R[0]+'"/></radialGradient><radialGradient id="cg" cx="40%" cy="40%" r="70%"><stop offset="0" stop-color="'+R[4]+'"/><stop offset="1" stop-color="'+R[3]+'"/></radialGradient></defs>';
   function flower(x,y,s,n){ let o=''; for(let i=0;i<n;i++){ const a=i*360/n; o+='<ellipse cx="'+x+'" cy="'+(y-s*0.55)+'" rx="'+(s*0.27)+'" ry="'+(s*0.6)+'" fill="url(#pg)" stroke="'+R[0]+'" stroke-opacity=".35" stroke-width="1" transform="rotate('+a+' '+x+' '+y+')"/>'; } o+='<circle cx="'+x+'" cy="'+y+'" r="'+(s*0.42)+'" fill="url(#cg)"/>'; for(let i=0;i<8;i++){ const a=i*45*Math.PI/180; o+='<circle cx="'+(x+Math.cos(a)*s*0.2)+'" cy="'+(y+Math.sin(a)*s*0.2)+'" r="'+(s*0.05)+'" fill="'+R[3]+'" opacity=".4"/>'; } return o; }
-  const pos = [[28,30,24],[120,14,28],[220,22,26],[275,70,24],[40,110,26],[190,96,22],[118,150,24],[262,150,28],[52,200,24],[160,206,26],[262,222,24],[118,236,22]];
+  const pos = [[150,64,30],[118,100,22],[182,100,22],[150,124,18],[112,58,14],[188,58,14]];
   let body = '';
   pos.forEach(p => { body += '<ellipse cx="'+p[0]+'" cy="'+(p[1]+p[2]*0.9)+'" rx="'+(p[2]*0.5)+'" ry="'+(p[2]*0.9)+'" fill="'+R[2]+'" opacity=".7"/>' + flower(p[0],p[1],p[2],N); });
   const svg = '<svg viewBox="0 0 300 240" preserveAspectRatio="xMidYMin slice">' + defs + body + '</svg>';
