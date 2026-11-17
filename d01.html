@@ -293,7 +293,7 @@ gsap.utils.toArray('#verse, #date, #venue, #dress, #countdown, #rsvp, footer').f
     const m = new DOMMatrixReadOnly(getComputedStyle(top).transform);
     const A = Math.atan2(m.b, m.a);
     const W = parseFloat(getComputedStyle(top).width), H = W * 0.8;
-    const tipX = cx + rad * Math.sin(A), tipY = cy - rad * Math.cos(A);
+    const tipX = cx, tipY = rr.top;
     top.style.setProperty('position','fixed','important');
     top.style.setProperty('inset','auto','important');
     top.style.setProperty('width', W + 'px', 'important');
